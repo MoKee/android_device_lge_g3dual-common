@@ -1,5 +1,9 @@
 [
   {
+    "repository": "android_vendor_lge_g3dual-common",
+    "target_path": "vendor/lge/g3dual-common"
+  },
+  {
     "repository": "android_kernel_lge_g3",
     "target_path": "kernel/lge/g3"
   },

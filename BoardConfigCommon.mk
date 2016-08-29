@@ -14,9 +14,9 @@
 # limitations under the License.
 
 # inherit from the proprietary version
--include vendor/lge/g3-common/BoardConfigVendor.mk
+-include vendor/lge/g3dual-common/BoardConfigVendor.mk
 
-LOCAL_PATH := device/lge/g3-common
+LOCAL_PATH := device/lge/g3dual-common
 
 TARGET_SPECIFIC_HEADER_PATH := $(LOCAL_PATH)/include
 
@@ -108,9 +108,6 @@ TARGET_POWERHAL_VARIANT := qcom
 # Qualcomm support
 BOARD_USES_QCOM_HARDWARE := true
 
-# RIL
-#BOARD_RIL_CLASS += ../../../device/lge/g3-common/ril
-
 # Recovery
 BOARD_SUPPRESS_EMMC_WIPE := true
 COMMON_GLOBAL_CFLAGS += -DNO_SECURE_DISCARD
@@ -119,7 +116,7 @@ TARGET_USERIMAGES_USE_EXT4 := true
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
-BOARD_SEPOLICY_DIRS += device/lge/g3-common/sepolicy
+BOARD_SEPOLICY_DIRS += device/lge/g3dual-common/sepolicy
 
 # Time services
 BOARD_USES_QC_TIME_SERVICES := true

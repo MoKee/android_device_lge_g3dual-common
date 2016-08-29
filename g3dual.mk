@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-$(call inherit-product-if-exists, vendor/lge/g3-common/g3-common-vendor.mk)
+$(call inherit-product-if-exists, vendor/lge/g3dual-common/g3dual-common-vendor.mk)
 
 # Overlay
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
