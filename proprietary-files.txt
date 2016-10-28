@@ -225,8 +225,8 @@ lib/libvss_resim_idl.so
 lib/libvss_resim_iface.so
 etc/permissions/qcnvitems.xml
 etc/permissions/qcrilhook.xml
--framework/qcnvitems.jar
--framework/qcrilhook.jar
+framework/qcnvitems.jar
+framework/qcrilhook.jar
 vendor/lib/libcneapiclient.so
 vendor/lib/libconfigdb.so
 vendor/lib/liblqe.so
