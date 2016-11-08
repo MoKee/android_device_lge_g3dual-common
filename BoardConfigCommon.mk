@@ -109,6 +109,9 @@ TARGET_USERIMAGES_USE_EXT4 := true
 # RIL
 BOARD_RIL_CLASS += ../../../device/lge/g3dual-common/ril
 
+# SDClang
+TARGET_USE_SDCLANG := true
+
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += device/lge/g3dual-common/sepolicy
