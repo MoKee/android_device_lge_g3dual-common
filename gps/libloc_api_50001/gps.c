@@ -1,4 +1,4 @@
-/* Copyright (c) 2013, The Linux Foundation. All rights reserved.
+/* Copyright (c) 2011 The Linux Foundation. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are
@@ -9,7 +9,7 @@
  *       copyright notice, this list of conditions and the following
  *       disclaimer in the documentation and/or other materials provided
  *       with the distribution.
- *     * Neither the name of The Linux Foundation, nor the names of its
+ *     * Neither the name of The Linux Foundation nor the names of its
  *       contributors may be used to endorse or promote products derived
  *       from this software without specific prior written permission.
  *
@@ -27,37 +27,46 @@
  *
  */
 
-#ifndef __LOC_DELAY_H__
-#define __LOC_DELAY_H__
+#include <hardware/gps.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif /* __cplusplus */
-#include<pthread.h>
-#include "log_util.h"
+#include <stdlib.h>
 
-/*
-  Return values:
-  Success = 0
-  Failure = Non zero
-*/
-typedef void(*loc_timer_callback)(void *user_data, int result);
+extern const GpsInterface* get_gps_interface();
 
-
-/*
-  Returns the handle, which can be used to stop the timer
-*/
-void* loc_timer_start(unsigned int delay_msec,
-                      loc_timer_callback,
-                      void* user_data);
-
-/*
-  handle becomes invalid upon the return of the callback
-*/
-void loc_timer_stop(void* handle);
-
-#ifdef __cplusplus
+const GpsInterface* gps__get_gps_interface(struct gps_device_t* dev)
+{
+    return get_gps_interface();
 }
-#endif /* __cplusplus */
 
-#endif //__LOC_DELAY_H__
+static int open_gps(const struct hw_module_t* module, char const* name,
+        struct hw_device_t** device)
+{
+    struct gps_device_t *dev = (struct gps_device_t *) malloc(sizeof(struct gps_device_t));
+
+    if(dev == NULL)
+        return -1;
+
+    memset(dev, 0, sizeof(*dev));
+
+    dev->common.tag = HARDWARE_DEVICE_TAG;
+    dev->common.version = 0;
+    dev->common.module = (struct hw_module_t*)module;
+    dev->get_gps_interface = gps__get_gps_interface;
+
+    *device = (struct hw_device_t*)dev;
+    return 0;
+}
+
+static struct hw_module_methods_t gps_module_methods = {
+    .open = open_gps
+};
+
+struct hw_module_t HAL_MODULE_INFO_SYM = {
+    .tag = HARDWARE_MODULE_TAG,
+    .module_api_version = 1,
+    .hal_api_version = 0,
+    .id = GPS_HARDWARE_MODULE_ID,
+    .name = "loc_api GPS Module",
+    .author = "Qualcomm USA, Inc.",
+    .methods = &gps_module_methods,
+};

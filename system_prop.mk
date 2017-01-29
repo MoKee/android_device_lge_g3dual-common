@@ -41,11 +41,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.audio.fluence.speaker=true \
     ro.qc.sdk.audio.fluencetype=fluence
 
-# GPS
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.gps.qc_nlp_in_use=0 \
-    ro.gps.agps_provider=1
-
 # OpenGLES
 # 196608 is decimal for 0x30000 to report version 3.0
 PRODUCT_PROPERTY_OVERRIDES += \
